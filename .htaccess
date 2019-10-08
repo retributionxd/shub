@@ -1,0 +1,11 @@
+# Enable Rewriting
+AddHandler application/x-httpd-php70 .php
+# For security reasons, Option followsymlinks cannot be overridden.
+Options +FollowSymLinks
+#Options +SymLinksIfOwnerMatch
+RewriteEngine On
+#To be able to access existing directories and files (standalone scripts).
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
+RewriteRule ^.*$ route.php
